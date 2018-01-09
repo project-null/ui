@@ -8,10 +8,6 @@ module.exports = {
     app: './src/index.jsx'
 
   },
-  // entry: [
-  //   'webpack-hot-middleware/client',
-  //   './src/index.jsx'
-  // ],
   devtool: 'inline-source-map',
   devServer: {
     hot: true

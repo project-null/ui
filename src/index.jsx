@@ -5,7 +5,6 @@ import P1 from './pages/p1.jsx';
 
 
 if (module.hot) {
-  console.log(module);
   module.hot.accept();
 }
 
