@@ -15,12 +15,31 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(jsx|js)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
-      }
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'react'],
+            plugins: [require('babel-plugin-transform-object-rest-spread'), ['import', {
+              libraryName: 'antd'
+            }]
+            ]
+          }
+        }]
+      },
+      {
+        test: /\.less$/,
+        loader: ['style-loader', 'css-loader', 'less-loader'],
+        exclude: /node_modules/
+      },
+      // {
+      //   test: /\.(jsx|js)$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: "babel-loader"
+      //   }
+      // }
     ]
   },
   plugins: [
@@ -37,7 +56,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   output: {
-    filename: '[name].bundle.js', 
+    filename: '[name].bundle.js',
     publicPath: '/',
     path: path.resolve(__dirname, 'dist')
   },
