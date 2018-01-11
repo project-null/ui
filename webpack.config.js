@@ -26,15 +26,19 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Hot Module Replacement',
       filename: 'index.html', //  文件路径
       template: './index.html', //  文件模板
+      minify: {
+        removeComments: true, //  移除HTML中的注释
+        collapseWhitespace: true //  删除空白符与换行符
+      }
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].bundle.js', 
+    publicPath: '/',
     path: path.resolve(__dirname, 'dist')
-  }
+  },
 };

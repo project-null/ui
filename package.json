@@ -14,11 +14,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --progress --watch",
-    "start": "webpack-dev-server --hotOnly",
+    "start": "webpack-dev-server --hotOnly --history-api-fallback",
     "build": "webpack"
   },
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "react-router-dom": "^4.2.2"
   },
   "name": "ui",
   "version": "1.0.0",
