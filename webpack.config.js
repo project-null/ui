@@ -12,34 +12,40 @@ module.exports = {
   devServer: {
     hot: true
   },
+  resolve: {
+    extensions: ['.js',  '.jsx'],
+    // alias: {
+    //   ufleetComp: path.resolve(__dirname, '../src/components/'),
+    // }
+  },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015', 'react'],
-            plugins: [require('babel-plugin-transform-object-rest-spread'), ['import', {
-              libraryName: 'antd'
-            }]
-            ]
-          }
-        }]
-      },
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   exclude: /node_modules/,
+      //   use: [{
+      //     loader: 'babel-loader',
+      //     options: {
+      //       presets: ['es2015', 'react'],
+      //       plugins: [require('babel-plugin-transform-object-rest-spread'), ['import', {
+      //         libraryName: 'antd'
+      //       }]
+      //       ]
+      //     }
+      //   }]
+      // },
       {
         test: /\.less$/,
         loader: ['style-loader', 'css-loader', 'less-loader'],
         exclude: /node_modules/
       },
-      // {
-      //   test: /\.(jsx|js)$/,
-      //   exclude: /node_modules/,
-      //   use: {
-      //     loader: "babel-loader"
-      //   }
-      // }
+      {
+        test: /\.(jsx|js)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
     ]
   },
   plugins: [

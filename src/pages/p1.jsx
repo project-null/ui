@@ -5,19 +5,20 @@ const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 export default class Sider extends React.Component {
+
   handleClick(e) {
     console.log('click ', e);
   }
+
   render() {
     return (
-      <Menu
-        onClick={this.handleClick}
-        style={{ width: 256 }}
+      <Menu onClick={this.handleClick}
+        style={{ width: 200 }}
         defaultSelectedKeys={['1']}
         defaultOpenKeys={['sub1']}
         mode="inline"
       >
-        <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
+        <SubMenu key="sub1" title={<span><Icon type="mail" /><span>导航</span></span>}>
           <MenuItemGroup key="g1" title="Item 1">
             <Menu.Item key="1">Option 1</Menu.Item>
             <Menu.Item key="2">Option 2</Menu.Item>
