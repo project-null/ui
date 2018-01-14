@@ -8,14 +8,19 @@ export default class Index extends React.Component {
     constructor() {
         super()
     }
-    
     render() {
+        const RouteWithSubRoutes = (route) => (
+            <Route path={route.path} render={props => (
+                <route.component {...props} routes={route.routes} />
+            )} />
+        )
         return (
             <div className="container">
                 <div className="content">
-                    <Route path={route.path} render={props => (
-                        <route.component {...props} routes={route.routes} />
-                    )} />
+
+                    {routes.map((route, i) => (
+                        <RouteWithSubRoutes key={i} {...route} />
+                    ))}
                 </div>
             </div>
         )

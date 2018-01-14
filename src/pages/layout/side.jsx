@@ -1,9 +1,12 @@
 import React from 'react';
-import { Menu, Icon } from 'antd';
-
 import { Link } from 'react-Router-dom';
+
+import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+
+const c1 = () => <h2>c1</h2>
+const c2 = () => <h2>c2</h2>
 
 export default class Sider extends React.Component {
   constructor() {
@@ -14,16 +17,16 @@ export default class Sider extends React.Component {
         label: '导航',
         url: '',
         subMenu: [
-          { label: '查看', url: 'overview' },
-          { label: '管理', url: 'setting' }
+          { label: '查看', url: 'overview', component: c1 },
+          { label: '管理', url: 'setting',component: c2 }
         ]
       }, {
         icon: 'mail',
         label: '密码',
         url: 'password',
         subMenu: [
-          { label: '查看', url: 'overview' },
-          { label: '管理', url: 'setting' }
+          { label: '查看', url: 'overview', component: c1 },
+          { label: '管理', url: 'setting',component: c2 }
         ]
       }, {
         icon: 'setting',
@@ -35,6 +38,7 @@ export default class Sider extends React.Component {
         ]
       }
     ];
+    
     this.state = {
       theme: 'dark',
       menuInfo
@@ -49,11 +53,12 @@ export default class Sider extends React.Component {
       return <Menu.Item key={index + '.' + i}>{v.label}</Menu.Item>
     });
   }
-  
+
   render() {
     return (
       <div className="side">
-        <Menu onClick={this.handleClick}
+        <Menu 
+        // onClick={this.handleClick}
           style={{ width: 170 }}
           defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}

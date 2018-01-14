@@ -1,85 +1,79 @@
-import React from 'react'
+import React from 'react';
+import { Menu, Icon } from 'antd';
 import {
     BrowserRouter as Router,
     Route,
     Link
 } from 'react-Router-dom'
+import Page1 from '../pages/page1';
 
-// Some folks find value in a centralized route config.
-// A route config is just data. React is great at mapping
-// data into components, and <Route> is a component.
+export default class Index extends React.Component {
+    constructor() {
+        super()
 
-////////////////////////////////////////////////////////////
-// first our route components
-const Main = () => <h2>Main</h2>
+        const Bus = () => <h3>Bus</h3>
+        const Cart = () => <h3>Cart</h3>
 
-const Sandwiches = () => <h2>Sandwiches</h2>
-
-const Tacos = ({ routes }) => (
-    <div>
-        <h2>Tacos</h2>
-        <ul>
-            <li><Link to="/tacos/bus">Bus</Link></li>
-            <li><Link to="/tacos/cart">Cart</Link></li>
-        </ul>
-
-        {routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route} />
-        ))}
-    </div>
-)
-
-const Bus = () => <h3>Bus</h3>
-const Cart = () => <h3>Cart</h3>
-
-////////////////////////////////////////////////////////////
-// then our route config
-const routes = [
-    {
-        path: '/sandwiches',
-        component: Sandwiches
-    },
-    {
-        path: '/tacos',
-        component: Tacos,
-        routes: [
+        this.routes = [
             {
-                path: '/tacos/bus',
-                component: Bus
+                path: '/cart',
+                label: 'cart',
+                component: Cart
             },
             {
-                path: '/tacos/cart',
-                component: Cart
+                path: '/page1',
+                label: 'page1',
+                component: Page1,
+                routes: [
+                    {
+                        path: '/page1/bus',
+                        label: 'page1 bus',
+                        component: Bus
+                    },
+                    {
+                        path: '/page1/bus11',
+                        label: 'bus.2',
+                        component: Cart
+                    }
+                ]
             }
         ]
     }
-]
+    render() {
+        const RouteWithSubRoutes = (route) => (
+            <Route path={route.path} render={props => (
+                <route.component {...props} routes={route.routes} />
+            )} />
+        );
+        const LinkSubRouter = (data) => {
+            let routes = data.routes;
+            if (!!routes && routes.length > 0) {
+                return routes.map((link, i) => {
+                    return <li key={i}>
+                        <Link to={link.path}>{link.label}</Link>
+                    </li>
+                });
+            }
+            return null;
 
-// wrap <Route> and use this everywhere instead, then when
-// sub routes are added to any route it'll work
-const RouteWithSubRoutes = (route) => (
-    <Route path={route.path} render={props => (
-        // pass the sub-routes down to keep nesting
-        <route.component {...props} routes={route.routes} />
-    )} />
-)
-
-const RouteConfigExample = () => (
-    <Router>
-        <div>
-            <ul>
-                <li><Link to="/tacos">Tacos</Link></li>
-                <li><Link to="/sandwiches">Sandwiches</Link></li>
-            </ul>
-            <div>
-                <h1>afjldjfaldjsl</h1>
-                {routes.map((route, i) => (
-                <RouteWithSubRoutes key={i} {...route} />
-            ))}
-            </div>
-           
-        </div>
-    </Router>
-)
-
-export default RouteConfigExample
+        }
+        return (
+            <Router>
+                <div>
+                    <ul>
+                        {this.routes.map((v, i) => {
+                            return <div key={i}><Link to={v.path}>{v.label}</Link>
+                                <LinkSubRouter key={i} routes={v.routes} />
+                            </div>
+                        })}
+                    </ul>
+                    <div>
+                        {this.routes.map((route, i) => (
+                            <RouteWithSubRoutes key={i} {...route} />
+                        ))}
+                    </div>
+                </div>
+            </Router>
+        )
+    }
+}
