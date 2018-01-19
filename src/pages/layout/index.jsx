@@ -36,18 +36,7 @@ export default class Index extends Component {
             {
                 path: '/p1',
                 title: '概览页',
-                subRoutes: [
-                    {
-                        path: '/p1',
-                        title: '概览1',
-                        component: P1,
-                    },
-                    {
-                        path: '/p2',
-                        title: '概览1',
-                        component: P2,
-                    }
-                ]
+                component: P1
             }, {
                 path: '/favorites',
                 title: '网页收藏夹',
@@ -57,7 +46,7 @@ export default class Index extends Component {
                 title: '密码保险箱',
                 component: P2
             }, {
-                path: '/p3',
+                path: '/settings',
                 title: '系统设置',
                 component: P3
             }
@@ -65,7 +54,7 @@ export default class Index extends Component {
 
         const RouteWithSubRoutes = (route) => (
             <Route path={route.path} render={props => (
-                <route.component {...props} routes={route.routes} />                                
+                <route.component {...props} routes={route.routes} />
             )}/>
         )
 
@@ -76,22 +65,18 @@ export default class Index extends Component {
                     collapsedWidth="0">
                     <div className="logo" />
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-                        {routes.map((v, i) => {
-                            if (v.subRoutes) {
-                                return <SubMenu key={i} title={<span><Icon type="mail" /><span>{v.title}</span></span>}>
-                                    {
-                                        v.subRoutes.map((sv, si) => {
-                                            return <Menu.Item key={`${i}_${si}`}><Link to={`${v.path}${sv.path}`}>{v.title}</Link></Menu.Item>
-                                        })
-                                    }
-                                </SubMenu>
-                            } else {
-                                return <Menu.Item key={i}>
-                                    <Icon type="user" />
-                                    <Link to={v.path}>{v.title}</Link>
-                                </Menu.Item>
-                            }
-                        })}
+                        <SubMenu title={<span><Icon type="mail" />概览页</span>}>
+                            <Menu.Item ><Link to="">概览1</Link></Menu.Item>
+                            <Menu.Item ><Link to="">概览2</Link></Menu.Item>
+                            <Menu.Item ><Link to="">概览3</Link></Menu.Item>
+                        </SubMenu>
+                        <SubMenu title={<span><Icon type="mail" />收藏夹</span>}>
+                            <Menu.Item ><Link to="/favorites">概览</Link></Menu.Item>
+                            <Menu.Item ><Link to="/favorites/manager">管理</Link></Menu.Item>                            
+                        </SubMenu>
+                        
+                        <Menu.Item ><Link to="/p2">密码保险箱</Link></Menu.Item>
+                        <Menu.Item ><Link to="/settings">系统设置</Link></Menu.Item>
                     </Menu>
 
                 </Sider>
