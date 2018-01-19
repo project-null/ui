@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router,
     Route,
     Link
-} from 'react-Router-dom'
+} from 'react-router-dom'
 
 // Some folks find value in a centralized route config.
 // A route config is just data. React is great at mapping
@@ -72,8 +72,7 @@ const RouteConfigExample = () => (
                 <li><Link to="/sandwiches">Sandwiches</Link></li>
             </ul>
             <div>
-                <h1>afjldjfaldjsl</h1>
-                {routes.map((route, i) => (
+                 {routes.map((route, i) => (
                 <RouteWithSubRoutes key={i} {...route} />
             ))}
             </div>

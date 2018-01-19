@@ -1,31 +1,9 @@
-@top-bar-height: 50px;
-@side-width: 170px;
-
-.top-bar {
-    height: @top-bar-height;
-    border-bottom: 1px solid #ccc;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-
-.side {
-    position: fixed;
-    top: @top-bar-height;
-    bottom: 0;
-    border-right: 1px solid #ccc;
-    background-color: #001529
-}
-
-.container {
-    position: fixed;
-    top: @top-bar-height;
-    left: @side-width;
-    bottom: 0;
-    right: 0;
-    .content {
-        padding: 10px;
-        background-color: red;
+.layout{
+    .logo{
+        height: 50px;        
+    }
+    .ant-menu-item > a{
+        display: inline-block;
+        font-size: 12px;
     }
 }
