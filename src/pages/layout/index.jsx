@@ -14,6 +14,7 @@ import './index.less';
 
 import Favorites from '../favorites';
 import Users from '../users';
+import Password from '../password';
 
 import P1 from '../p1';
 import P2 from '../p2';
@@ -43,9 +44,9 @@ export default class Index extends Component {
             title: '网页收藏夹',
             component: Favorites
         }, {
-            path: '/p2',
+            path: '/password',
             title: '密码保险箱',
-            component: P2
+            component: Password
         }, {
             path: '/settings/users',
             title: '用户',
@@ -66,7 +67,7 @@ export default class Index extends Component {
                     <div className="logo" />
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
                         <SubMenu title={<span><Icon type="mail" />概览页</span>}>
-                            <Menu.Item ><Link to="">概览1</Link></Menu.Item>
+                            <Menu.Item ><Link to="/p1">概览1</Link></Menu.Item>
                             <Menu.Item ><Link to="">概览2</Link></Menu.Item>
                             <Menu.Item ><Link to="">概览3</Link></Menu.Item>
                         </SubMenu>

@@ -20,6 +20,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
+            $utils: path.resolve(__dirname, './src/utils'),
             $models: path.resolve(__dirname, './src/models'),
         }
     },

@@ -1,6 +1,6 @@
 import React from 'react';
 import users from '$models/users';
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 
 export default class Index extends React.Component {
     constructor() {
@@ -33,13 +33,18 @@ export default class Index extends React.Component {
             key: 'email',
         }];
     }
+    onClick() {
+        console.log(1);
+        this.props.history.push("/favorites/manager");
+    }
 
     render() {
         return (
             <div>
                 <h3>用户管理</h3>
+                <Button onClick={() => this.onClick() }>fasdfasdf</Button>
                 <Table dataSource={this.state.dataSource} columns={this.tableColumns()} />
-            </div>
+            </div >
         );
     }
 }
