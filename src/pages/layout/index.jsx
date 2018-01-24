@@ -13,6 +13,8 @@ import {
 import './index.less';
 
 import Favorites from '../favorites';
+import Users from '../users';
+
 import P1 from '../p1';
 import P2 from '../p2';
 import P3 from '../p3';
@@ -32,30 +34,28 @@ export default class Index extends Component {
     }
 
     render() {
-        const routes = [
-            {
-                path: '/p1',
-                title: '概览页',
-                component: P1
-            }, {
-                path: '/favorites',
-                title: '网页收藏夹',
-                component: Favorites
-            }, {
-                path: '/p2',
-                title: '密码保险箱',
-                component: P2
-            }, {
-                path: '/settings',
-                title: '系统设置',
-                component: P3
-            }
-        ]
+        const routes = [{
+            path: '/p1',
+            title: '概览页',
+            component: P1
+        }, {
+            path: '/favorites',
+            title: '网页收藏夹',
+            component: Favorites
+        }, {
+            path: '/p2',
+            title: '密码保险箱',
+            component: P2
+        }, {
+            path: '/settings/users',
+            title: '用户',
+            component: Users
+        }]
 
         const RouteWithSubRoutes = (route) => (
             <Route path={route.path} render={props => (
                 <route.component {...props} routes={route.routes} />
-            )}/>
+            )} />
         )
 
         return (<Router>
@@ -72,11 +72,18 @@ export default class Index extends Component {
                         </SubMenu>
                         <SubMenu title={<span><Icon type="mail" />收藏夹</span>}>
                             <Menu.Item ><Link to="/favorites">概览</Link></Menu.Item>
-                            <Menu.Item ><Link to="/favorites/manager">管理</Link></Menu.Item>                            
+                            <Menu.Item ><Link to="/favorites/manager">管理</Link></Menu.Item>
                         </SubMenu>
-                        
-                        <Menu.Item ><Link to="/p2">密码保险箱</Link></Menu.Item>
-                        <Menu.Item ><Link to="/settings">系统设置</Link></Menu.Item>
+
+                        <SubMenu title={<span><Icon type="mail" />密码本</span>}>
+                            <Menu.Item ><Link to="/password">概览</Link></Menu.Item>
+                            <Menu.Item ><Link to="/password/manager">管理</Link></Menu.Item>
+                        </SubMenu>
+
+                        <SubMenu title={<span><Icon type="mail" />系统管理</span>}>
+                            <Menu.Item ><Link to="/settings/users">用户管理</Link></Menu.Item>
+                            <Menu.Item ><Link to="/favorites/manager">管理</Link></Menu.Item>
+                        </SubMenu>
                     </Menu>
 
                 </Sider>
