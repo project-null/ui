@@ -1,7 +1,7 @@
 import React from 'react';
 import crypto from '$utils/crypto';
 
-import { Input, Button, Modal, Form, Icon, Select, Row, Col } from 'antd';
+import { Input, Button, Modal, Form, Icon, Select } from 'antd';
 
 const { TextArea } = Input;
 const FormItem = Form.Item;
@@ -12,8 +12,7 @@ class Index extends React.Component {
     constructor() {
         super();
         this.state = {
-            visible: false,
-            showPassword: false,
+            visible: false
         }
 
         this.formItemLayout = {
@@ -46,20 +45,12 @@ class Index extends React.Component {
             let key = cryp.genKey(values.key);
             let encode = cryp.aesEncrypt(values.password, key);
             let desCode = cryp.aesDecrypt(encode, key)
-            values.password = encode;
-            console.log(values, desCode);
-
             this.setState({ visible: false });
         });
     }
 
     onPasswordChange(e) {
         let value = e.target.value;
-    }
-    onShowPassword() {
-        this.setState({
-            showPassword: !this.state.showPassword
-        })
     }
 
     render() {
@@ -104,14 +95,7 @@ class Index extends React.Component {
                                 {getFieldDecorator('password', {
                                     rules: [{ required: true, message: '请输入密码' }],
                                 })(
-                                    <Row>
-                                        <Col span={18}>
-                                            <Input onChange={this.onPasswordChange} type={this.state.showPassword ? 'text' : 'password'} placeholder="密码，仅用于加密而不保存在后端" />
-                                        </Col>
-                                        <Col span={6}>
-                                            <Button onClick={this.onShowPassword.bind(this)}>show</Button>
-                                        </Col>
-                                    </Row>
+                                    <Input width="100" onChange={this.onPasswordChange} placeholder="密码，仅用于加密而不保存在后端" />
                                     )}
                             </FormItem>
                             <FormItem {...this.formItemLayout} label="秘钥">
