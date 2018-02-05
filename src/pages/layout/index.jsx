@@ -66,22 +66,22 @@ export default class Index extends Component {
                     collapsedWidth="0">
                     <div className="logo" />
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-                        <SubMenu title={<span><Icon type="mail" />概览页</span>}>
+                        <SubMenu title={<span><Icon type="area-chart" />概览页</span>}>
                             <Menu.Item ><Link to="/p1">概览1</Link></Menu.Item>
                             <Menu.Item ><Link to="">概览2</Link></Menu.Item>
                             <Menu.Item ><Link to="">概览3</Link></Menu.Item>
                         </SubMenu>
-                        <SubMenu title={<span><Icon type="mail" />收藏夹</span>}>
+                        <SubMenu title={<span><Icon type="appstore-o" />收藏夹</span>}>
                             <Menu.Item ><Link to="/favorites">概览</Link></Menu.Item>
                             <Menu.Item ><Link to="/favorites/manager">管理</Link></Menu.Item>
                         </SubMenu>
 
-                        <SubMenu title={<span><Icon type="mail" />密码本</span>}>
+                        <SubMenu title={<span><Icon type="book" />密码本</span>}>
                             <Menu.Item ><Link to="/password">概览</Link></Menu.Item>
                             <Menu.Item ><Link to="/password/manager">管理</Link></Menu.Item>
                         </SubMenu>
 
-                        <SubMenu title={<span><Icon type="mail" />系统管理</span>}>
+                        <SubMenu title={<span><Icon type="setting" />系统管理</span>}>
                             <Menu.Item ><Link to="/settings/users">用户管理</Link></Menu.Item>
                             <Menu.Item ><Link to="/favorites/manager">管理</Link></Menu.Item>
                         </SubMenu>

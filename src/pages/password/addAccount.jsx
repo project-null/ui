@@ -26,13 +26,14 @@ class Index extends React.Component {
             },
         };
     }
-    onClick() {
+    componentWillReceiveProps(nextProps) {
 
     }
 
     handleCancle() {
         this.setState({ visible: false });
         this.props.form.resetFields();
+        this.props.onCancel();
     }
 
     handleOk(e) {
@@ -45,7 +46,8 @@ class Index extends React.Component {
             let key = cryp.genKey(values.key);
             let encode = cryp.aesEncrypt(values.password, key);
             let desCode = cryp.aesDecrypt(encode, key)
-            this.setState({ visible: false });
+            values.password = encode;
+            this.props.onOk(values)
         });
     }
 
@@ -55,23 +57,21 @@ class Index extends React.Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
-
         return (
             <div>
-                <Button type="primary" onClick={() => this.setState({ visible: true })}>Open</Button>
                 <Modal
                     title="添加账户信息"
-                    visible={this.state.visible}
+                    visible={this.props.visible}
                     onOk={this.handleOk.bind(this)}
-                    onCancel={this.handleCancle.bind(this)}
-                >
-                    <div>
+                    onCancel={this.handleCancle.bind(this)}>
+                    <div className="account-password">
                         <Form>
+
                             <FormItem {...this.formItemLayout} label="账号类型">
                                 {getFieldDecorator('type', {
                                     rules: [{ required: true, message: '请选择账号类型' }],
                                 })(
-                                    <Select>
+                                    <Select placeholder="请选择账号类型">
                                         <Option value="jack">she</Option>
                                         <Option value="lucy">Lucy</Option>
                                         <Option value="disabled">Disabled</Option>
@@ -79,11 +79,13 @@ class Index extends React.Component {
                                     </Select>
                                     )}
                             </FormItem>
+
                             <FormItem {...this.formItemLayout} label="网址">
                                 {getFieldDecorator('url')(
                                     <Input placeholder="请输入网址" />
                                 )}
                             </FormItem>
+
                             <FormItem {...this.formItemLayout} label="用户名">
                                 {getFieldDecorator('userName', {
                                     rules: [{ required: true, message: '请输入用户名' }],
@@ -91,20 +93,23 @@ class Index extends React.Component {
                                     <Input placeholder="用户名" />
                                     )}
                             </FormItem>
+
                             <FormItem {...this.formItemLayout} label="密码">
                                 {getFieldDecorator('password', {
                                     rules: [{ required: true, message: '请输入密码' }],
                                 })(
-                                    <Input width="100" onChange={this.onPasswordChange} placeholder="密码，仅用于加密而不保存在后端" />
+                                    <Input width="100" type="password" onChange={this.onPasswordChange} placeholder="密码，仅用于加密而不保存在后端" />
                                     )}
                             </FormItem>
+
                             <FormItem {...this.formItemLayout} label="秘钥">
                                 {getFieldDecorator('key', {
                                     rules: [{ required: true, message: '请输入秘钥' }],
                                 })(
-                                    <Input placeholder="秘钥请牢记，若遗忘则无法找回" />
+                                    <Input type="password" placeholder="秘钥请牢记，若遗忘则无法找回" />
                                     )}
                             </FormItem>
+
                             <FormItem {...this.formItemLayout} label="标签">
                                 {getFieldDecorator('tags')(
                                     <Select
@@ -113,9 +118,10 @@ class Index extends React.Component {
                                     />
                                 )}
                             </FormItem>
+
                             <FormItem {...this.formItemLayout} label="备注">
                                 {getFieldDecorator('common')(
-                                    <TextArea autosize={{ minRows: 3, maxRows: 6 }} />
+                                    <TextArea placeholder="请输入备注,可选" autosize={{ minRows: 3, maxRows: 6 }} />
                                 )}
                             </FormItem>
                         </Form>
