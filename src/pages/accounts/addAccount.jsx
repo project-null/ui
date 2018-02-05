@@ -47,7 +47,7 @@ class Index extends React.Component {
             let encode = cryp.aesEncrypt(values.password, key);
             let desCode = cryp.aesDecrypt(encode, key)
             values.password = encode;
-            this.props.onOk(values)
+            this.props.onOk(values)            
         });
     }
 
@@ -87,7 +87,7 @@ class Index extends React.Component {
                             </FormItem>
 
                             <FormItem {...this.formItemLayout} label="用户名">
-                                {getFieldDecorator('userName', {
+                                {getFieldDecorator('accountName', {
                                     rules: [{ required: true, message: '请输入用户名' }],
                                 })(
                                     <Input placeholder="用户名" />
@@ -111,7 +111,7 @@ class Index extends React.Component {
                             </FormItem>
 
                             <FormItem {...this.formItemLayout} label="标签">
-                                {getFieldDecorator('tags')(
+                                {getFieldDecorator('labels')(
                                     <Select
                                         mode="tags"
                                         placeholder="请输入标签，方便查找"
