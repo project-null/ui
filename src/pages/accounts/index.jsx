@@ -34,6 +34,13 @@ class Index extends React.Component {
             this.getTablesData();
         });
     }
+    accountDetail(value) {
+        console.log(value);
+        this.setState({
+            accountDetail: value,
+            AddAccountModalVisible: true,
+        });
+    }
 
     tableColumns() {
         return [{
@@ -71,7 +78,7 @@ class Index extends React.Component {
             key: 'actions',
             render: (labels, b) => {
                 return <div>
-                    <Button size="small">查看/编辑</Button>
+                    <Button size="small" onClick={() => { this.accountDetail(b) }}>查看/编辑</Button>
                     <Button size="small">删除</Button>
                 </div>;
             },
@@ -83,6 +90,7 @@ class Index extends React.Component {
             <div className="account-password">
                 <Button type="primary" onClick={() => this.setState({ AddAccountModalVisible: true })}>添加账号</Button>
                 <AddAccountModal
+                    data={this.state.accountDetail}
                     visible={this.state.AddAccountModalVisible}
                     onOk={this.onAddAccountOk.bind(this)}
                     onCancel={() => this.setState({ AddAccountModalVisible: false })} />

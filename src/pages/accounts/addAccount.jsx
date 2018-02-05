@@ -27,7 +27,11 @@ class Index extends React.Component {
         };
     }
     componentWillReceiveProps(nextProps) {
-
+        if (nextProps.data !== this.props.data) {
+            if(nextProps.visible){
+                this.props.form.setFieldsValue(nextProps.data);
+            }
+        }
     }
 
     handleCancle() {
@@ -47,7 +51,7 @@ class Index extends React.Component {
             let encode = cryp.aesEncrypt(values.password, key);
             let desCode = cryp.aesDecrypt(encode, key)
             values.password = encode;
-            this.props.onOk(values)            
+            this.props.onOk(values)
         });
     }
 
