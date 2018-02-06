@@ -22,6 +22,7 @@ module.exports = webpackMerge(commonConfig, {
     },
 
     plugins: [
+        new webpack.NamedModulesPlugin(),
         new CleanWebpackPlugin([resolve('dist')]),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
@@ -33,9 +34,6 @@ module.exports = webpackMerge(commonConfig, {
             },
             sourceMap: true,
             mangle: true
-        }),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
         })
     ]
 });
