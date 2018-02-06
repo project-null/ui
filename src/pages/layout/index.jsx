@@ -66,7 +66,7 @@ export default class Index extends Component {
                     // collapsedWidth="0"
                     >
                     <div className="logo" />
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+                    <Menu theme="dark" style={{ width: 180 }} mode="inline" defaultSelectedKeys={['4']}>
                         <SubMenu title={<span><Icon type="area-chart" />概览页</span>}>
                             <Menu.Item ><Link to="/p1">概览1</Link></Menu.Item>
                             <Menu.Item ><Link to="">概览2</Link></Menu.Item>

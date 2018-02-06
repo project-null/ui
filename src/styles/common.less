@@ -1,0 +1,33 @@
+.loop(@type, @name, @counter) when (@counter > 0) {
+    @value: 5 * @counter;
+    .@{name}-@{value} {
+        @{type}: @value *1px;
+    }
+    .loop(@type, @name, (@counter - 1));
+}
+
+body {
+    @value: 50;
+    .loop(width, w, @value);
+    .loop(height, h, @value);
+    .loop(margin, m, @value);
+    .loop(margin-left, ml, @value);
+    .loop(margin-right, mr, @value);
+    .loop(margin-top, mt, @value);
+    .loop(margin-bottom, mb, @value);
+    .loop(padding, p, @value);
+    .loop(padding-left, pl, @value);
+    .loop(padding-right, pr, @value);
+    .loop(padding-top, pt, @value);
+    .loop(padding-bottom, pb, @value);
+
+    .text-left {
+        text-align: left;
+    }
+    .text-right {
+        text-align: right;
+    }
+    .text-center {
+        text-align: center;
+    }
+}

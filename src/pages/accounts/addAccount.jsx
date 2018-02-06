@@ -51,6 +51,7 @@ class Index extends React.Component {
             let encode = cryp.aesEncrypt(values.password, key);
             let desCode = cryp.aesDecrypt(encode, key)
             values.password = encode;
+            delete values.key;
             this.props.onOk(values)
         });
     }
@@ -70,7 +71,6 @@ class Index extends React.Component {
                     onCancel={this.handleCancle.bind(this)}>
                     <div className="account-password">
                         <Form>
-
                             <FormItem {...this.formItemLayout} label="账号类型">
                                 {getFieldDecorator('type', {
                                     rules: [{ required: true, message: '请选择账号类型' }],

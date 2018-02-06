@@ -6,6 +6,8 @@ import AccountsModel from '$models/accounts';
 import { Button, Modal, Form, Icon, Table, Row, Col } from 'antd';
 import './index.less';
 
+const FormItem = Form.Item;
+
 class Index extends React.Component {
     constructor() {
         super();
@@ -18,6 +20,7 @@ class Index extends React.Component {
     componentDidMount() {
         this.getTablesData();
     }
+
     getTablesData() {
         AccountsModel.getAllAccount().then(response => {
             let dataSource = response.data.map(r => {
@@ -34,8 +37,8 @@ class Index extends React.Component {
             this.getTablesData();
         });
     }
+
     accountDetail(value) {
-        console.log(value);
         this.setState({
             accountDetail: value,
             AddAccountModalVisible: true,
@@ -78,8 +81,15 @@ class Index extends React.Component {
             key: 'actions',
             render: (labels, b) => {
                 return <div>
-                    <Button size="small" onClick={() => { this.accountDetail(b) }}>查看/编辑</Button>
-                    <Button size="small">删除</Button>
+                    <Button size="small" title="查看密码" type="primary" className="mr-5" onClick={() => { this.accountDetail(b) }}>
+                        <Icon type="eye" />
+                    </Button>
+                    <Button size="small" title="编辑" className="mr-5" onClick={() => { this.accountDetail(b) }}>
+                        <Icon type="edit" />
+                    </Button>
+                    <Button size="small" title="删除" type="danger" className="mr-5" >
+                        <Icon type="user-delete" />
+                    </Button>
                 </div>;
             },
         }];
@@ -88,7 +98,9 @@ class Index extends React.Component {
     render() {
         return (
             <div className="account-password">
-                <Button type="primary" onClick={() => this.setState({ AddAccountModalVisible: true })}>添加账号</Button>
+                <div className="text-right mb-10">
+                    <Button type="primary" onClick={() => this.setState({ AddAccountModalVisible: true })}><Icon type="user-add" /></Button>
+                </div>
                 <AddAccountModal
                     data={this.state.accountDetail}
                     visible={this.state.AddAccountModalVisible}

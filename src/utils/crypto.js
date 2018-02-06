@@ -19,7 +19,6 @@ export default class Crypto {
         if (keys.length < filledKey.length) {
             filledKey.map((b, i) => filledKey[i] = keys[i]);
         }
-        console.log(filledKey.length)
         return filledKey;
     }
 
