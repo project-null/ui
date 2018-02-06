@@ -1,7 +1,7 @@
 .loop(@type, @name, @counter) when (@counter > 0) {
     @value: 5 * @counter;
     .@{name}-@{value} {
-        @{type}: @value *1px;
+        @{type}: @value *1px !important;
     }
     .loop(@type, @name, (@counter - 1));
 }
