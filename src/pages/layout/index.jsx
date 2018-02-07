@@ -1,17 +1,19 @@
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Dropdown, Icon } from 'antd';
 import React, { Component } from 'react';
 
 const SubMenu = Menu.SubMenu;
 const { Header, Content, Footer, Sider } = Layout;
+import history from '../history';
 
 import {
-    BrowserRouter as Router,
+    Router,
     Route,
     Link
 } from 'react-router-dom'
 
 import './index.less';
 
+import Login from '../system/login';
 import Favorites from '../favorites';
 import Users from '../users';
 import accounts from '../accounts';
@@ -36,21 +38,20 @@ export default class Index extends Component {
 
     render() {
         const routes = [{
-            path: '/p1',
-            title: '概览页',
+            path: '/pages/dashboard',
             component: P1
         }, {
-            path: '/favorites',
-            title: '网页收藏夹',
+            path: '/pages/favorites',
             component: Favorites
         }, {
-            path: '/accounts',
-            title: '密码保险箱',
+            path: '/pages/accounts',
             component: accounts
         }, {
-            path: '/settings/users',
-            title: '用户',
+            path: '/pages/settings/users',
             component: Users
+        }, {
+            path: '/pages/favorites/manager',
+            component: P3
         }]
 
         const RouteWithSubRoutes = (route) => (
@@ -59,49 +60,65 @@ export default class Index extends Component {
             )} />
         )
 
-        return (<Router>
-            <Layout className="layout">
-                <Sider
-                    // breakpoint="lg"
-                    // collapsedWidth="0"
-                    >
-                    <div className="logo" />
-                    <Menu theme="dark" style={{ width: 180 }} mode="inline" defaultSelectedKeys={['4']}>
-                        <SubMenu title={<span><Icon type="area-chart" />概览页</span>}>
-                            <Menu.Item ><Link to="/p1">概览1</Link></Menu.Item>
-                            <Menu.Item ><Link to="">概览2</Link></Menu.Item>
-                            <Menu.Item ><Link to="">概览3</Link></Menu.Item>
-                        </SubMenu>
-                        <SubMenu title={<span><Icon type="appstore-o" />收藏夹</span>}>
-                            <Menu.Item ><Link to="/favorites">概览</Link></Menu.Item>
-                            <Menu.Item ><Link to="/favorites/manager">管理</Link></Menu.Item>
-                        </SubMenu>
+        const menu = (
+            <Menu>
+                <Menu.Item>
+                    <a>个人设置</a>
+                </Menu.Item>
+                <Menu.Item>
+                    <a>登出</a>
+                </Menu.Item>
+            </Menu>
+        );
 
-                        <SubMenu title={<span><Icon type="book" />密码本</span>}>
-                            <Menu.Item ><Link to="/accounts">概览</Link></Menu.Item>
-                            <Menu.Item ><Link to="/accounts/manager">管理</Link></Menu.Item>
-                        </SubMenu>
 
-                        <SubMenu title={<span><Icon type="setting" />系统管理</span>}>
-                            <Menu.Item ><Link to="/settings/users">用户管理</Link></Menu.Item>
-                            <Menu.Item ><Link to="/favorites/manager">管理</Link></Menu.Item>
-                        </SubMenu>
-                    </Menu>
+        return (
+            <Router history={history}>
+                <div>
+                    <Layout className="layout">
+                        <Sider>
+                            <div className="logo" />
+                            <Menu theme="dark" style={{ width: 180 }} mode="inline" defaultSelectedKeys={['4']}>
+                                <SubMenu title={<span><Icon type="area-chart" />概览页</span>}>
+                                    <Menu.Item ><Link to="/pages/dashboard">概览1</Link></Menu.Item>
+                                </SubMenu>
+                                <SubMenu title={<span><Icon type="appstore-o" />收藏夹</span>}>
+                                    <Menu.Item ><Link to="/pages/favorites">概览</Link></Menu.Item>
+                                    <Menu.Item ><Link to="/pages/favorites/manager">管理</Link></Menu.Item>
+                                </SubMenu>
 
-                </Sider>
-                <Layout>
-                    <Header style={{ background: '#fff', padding: 0 }}>
-                    </Header>
+                                <SubMenu title={<span><Icon type="book" />密码本</span>}>
+                                    <Menu.Item ><Link to="/pages/accounts">概览</Link></Menu.Item>                                    
+                                </SubMenu>
 
-                    <Content style={{ margin: '24px 16px 0' }}>
-                        <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                            {routes.map((route, i) => (
-                                <RouteWithSubRoutes key={i} {...route} />
-                            ))}
-                        </div>
-                    </Content>
-                </Layout>
-            </Layout>
-        </Router >)
+                                <SubMenu title={<span><Icon type="setting" />系统管理</span>}>
+                                    <Menu.Item ><Link to="/pages/settings/users">用户管理</Link></Menu.Item>
+                                    <Menu.Item ><Link to="/pages/favorites/manager">管理</Link></Menu.Item>
+                                </SubMenu>
+                            </Menu>
+                        </Sider>
+                        <Layout>
+                            <Header style={{ background: '#fff', padding: 0 }}>
+                                <ul className="header-ul">
+                                    <li>
+                                        <Dropdown overlay={menu}>
+                                            <a className="ant-dropdown-link" href="#">
+                                                <Icon type="user" />张三<Icon type="down" />
+                                            </a>
+                                        </Dropdown>
+                                    </li>
+                                </ul>
+                            </Header>
+                            <Content style={{ margin: '24px 16px 0' }}>
+                                <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                                    {routes.map((route, i) => (
+                                        <RouteWithSubRoutes key={i} {...route} />
+                                    ))}
+                                </div>
+                            </Content>
+                        </Layout>
+                    </Layout>
+                </div>
+            </Router >)
     }
 }
