@@ -2,6 +2,7 @@ import React from 'react';
 import crypto from '$utils/crypto';
 import AddAccountModal from './addAccount';
 import AccountsModel from '$models/accounts';
+import accountType from '$utils/accountType';
 
 import { Button, message, Modal, Form, Icon, Table, Row, Col } from 'antd';
 import './index.less';
@@ -12,6 +13,7 @@ const confirm = Modal.confirm;
 class Index extends React.Component {
     constructor() {
         super();
+        this.typeList = accountType;
         this.state = {
             dataSource: [],
             accountDetail: {
@@ -26,7 +28,7 @@ class Index extends React.Component {
 
     getTablesData() {
         AccountsModel.getAllAccount().then(response => {
-            let dataSource = response.data.map(r => {                
+            let dataSource = response.data.map(r => {
                 r.key = r._id;
                 return r;
             });
@@ -83,6 +85,13 @@ class Index extends React.Component {
             title: '类型',
             dataIndex: 'type',
             key: 'type',
+            render: (typeID) => {
+                if (isFinite(typeID) && typeID >= 0) {
+                    return this.typeList[typeID].text;
+                } else {
+                    return typeID;
+                }
+            },
         }, {
             title: '网址',
             dataIndex: 'url',

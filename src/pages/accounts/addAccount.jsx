@@ -1,5 +1,6 @@
 import React from 'react';
 import crypto from '$utils/crypto';
+import accountType from '$utils/accountType';
 
 import { Input, Button, Modal, Form, Icon, Select, Row, Col, Checkbox } from 'antd';
 
@@ -14,7 +15,9 @@ class Index extends React.Component {
         this.state = {
             visible: false,
             showPassword: false
-        }
+        };
+
+        this.typeList = accountType;
 
         this.formItemLayout = {
             labelCol: {
@@ -65,7 +68,7 @@ class Index extends React.Component {
                 const { _id } = this.props.data;
                 values._id = _id;
             }
-                                    
+
             this.props.onOk(values, this.props.mode);
             this.props.form.resetFields();
         });
@@ -125,16 +128,15 @@ class Index extends React.Component {
                                     rules: [{ required: true, message: '请选择账号类型' }],
                                 })(
                                     <Select placeholder="请选择账号类型">
-                                        <Option value="jack">she</Option>
-                                        <Option value="lucy">Lucy</Option>
-                                        <Option value="disabled">Disabled</Option>
-                                        <Option value="Yiminghe">yiminghe</Option>
+                                        {
+                                            this.typeList.map(v => <Option key={v.id} value={v.id}>{v.text}</Option>)
+                                        }
                                     </Select>
                                     )}
                             </FormItem>
 
                             <FormItem {...this.formItemLayout} label="网址">
-                                {getFieldDecorator('url')(
+                                {getFieldDecorator('url', { initialValue: 'http://' })(
                                     <Input placeholder="请输入网址" />
                                 )}
                             </FormItem>

@@ -12,8 +12,8 @@ axios.interceptors.response.use(function (response) {
         confirm({
             title: '认证信息失效',
             content: '当前认证信息失效，是否重新登录',
-            okText:'重新登录',
-            cancelText:'取消',
+            okText: '重新登录',
+            cancelText: '取消',
             onOk() {
                 location.pathname = "/";
             },
@@ -24,5 +24,4 @@ axios.interceptors.response.use(function (response) {
     }
     return Promise.reject(error);
 });
-
 export default axios;

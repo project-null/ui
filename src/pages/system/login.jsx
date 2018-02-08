@@ -13,8 +13,8 @@ class NormalLoginForm extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 UsersModel.login(values).then(xhr => {
-                    document.cookie = `token:${xhr.data}`;
-                    localStorage.setItem('token', xhr.data);
+                    let token = xhr.data;                    
+                    UsersModel.setToken(token);
                     this.props.history.push('/pages');
                 });
             }
