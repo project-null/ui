@@ -22,11 +22,12 @@
     "react-router-dom": "^4.2.2",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.10.0",
     "webpack-dev-server": "^2.10.0",
     "webpack-merge": "^4.1.1"
   },
-  "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.js --hot --colors --inline --history-api-fallback --progress --host 0.0.0.0",
+  "scripts": {    
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.js --hotOnly --colors --inline --history-api-fallback --progress --host 0.0.0.0",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod.js --progress --profile --bail"
   },
   "dependencies": {

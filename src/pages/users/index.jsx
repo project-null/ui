@@ -18,6 +18,7 @@ export default class Index extends React.Component {
             })
         });
     }
+    
     tableColumns() {
         return [{
             title: '登录名',
@@ -33,16 +34,11 @@ export default class Index extends React.Component {
             key: 'email',
         }];
     }
-    onClick() {
-        console.log(1);
-        this.props.history.push("/favorites/manager");
-    }
 
     render() {
         return (
             <div>
                 <h3>用户管理</h3>
-                <Button onClick={() => this.onClick() }>fasdfasdf</Button>
                 <Table dataSource={this.state.dataSource} columns={this.tableColumns()} />
             </div >
         );

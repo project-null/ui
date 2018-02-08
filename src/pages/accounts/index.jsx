@@ -26,8 +26,8 @@ class Index extends React.Component {
 
     getTablesData() {
         AccountsModel.getAllAccount().then(response => {
-            let dataSource = response.data.map(r => {
-                r.rowKey = r._id;
+            let dataSource = response.data.map(r => {                
+                r.key = r._id;
                 return r;
             });
             this.setState({ dataSource });
@@ -66,7 +66,7 @@ class Index extends React.Component {
             title: `是否删除账号名称${account.name}`,
             content: `是否删除账号名称${account.name},删除后将不在存储相关数据，无法恢复`,
             onOk() {
-                AccountsModel.delete(account.uuid).then(xhr => {
+                AccountsModel.delete(account._id).then(xhr => {
                     then.getTablesData();
                 });
             },
@@ -87,6 +87,9 @@ class Index extends React.Component {
             title: '网址',
             dataIndex: 'url',
             key: 'url',
+            render: (url, account) => {
+                return <a target="_blank" href={url}>{url}</a>;
+            },
         }, {
             title: '用户名',
             dataIndex: 'accountName',

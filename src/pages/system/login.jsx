@@ -4,13 +4,20 @@ const FormItem = Form.Item;
 import React from 'react';
 import './index.less';
 
+import UsersModel from '$models/users';
+
+
 class NormalLoginForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.history.push('/pages');                
-            }            
+                UsersModel.login(values).then(xhr => {
+                    document.cookie = `token:${xhr.data}`;
+                    localStorage.setItem('token', xhr.data);
+                    this.props.history.push('/pages');
+                });
+            }
         });
     }
     render() {
@@ -21,7 +28,7 @@ class NormalLoginForm extends React.Component {
                     <Col offset={13} lg={4}>
                         <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                             <FormItem hasFeedback>
-                                {getFieldDecorator('userName', {
+                                {getFieldDecorator('loginName', {
                                     rules: [{ required: true, message: 'Please input your username!' }],
                                 })(
                                     <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />

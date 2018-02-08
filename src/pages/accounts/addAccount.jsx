@@ -62,9 +62,10 @@ class Index extends React.Component {
             values.secretText = encode
 
             if (this.props.data) {
-                const { uuid } = this.props.data;
-                values.uuid = uuid;
+                const { _id } = this.props.data;
+                values._id = _id;
             }
+                                    
             this.props.onOk(values, this.props.mode);
             this.props.form.resetFields();
         });
