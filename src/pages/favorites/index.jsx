@@ -16,8 +16,8 @@ export default class index extends React.Component {
   componentDidMount(){
       // this.getAllWebsite();
       this.getImg();
-      this.test();
   }
+
 
   getAllWebsite(){
     FavoritesModel.getAllWebsite().then(response=>{
