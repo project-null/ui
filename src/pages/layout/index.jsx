@@ -15,6 +15,7 @@ import './index.less';
 
 import Login from '../system/login';
 import Favorites from '../favorites';
+import FavoritesManager from '../favorites/manager';
 import Users from '../users';
 import accounts from '../accounts';
 
@@ -51,11 +52,11 @@ export default class Index extends Component {
             component: Users
         }, {
             path: '/pages/favorites/manager',
-            component: P3
+            component: FavoritesManager
         }]
 
         const RouteWithSubRoutes = (route) => (
-            <Route path={route.path} render={props => (
+            <Route exact path={route.path} render={props => (
                 <route.component {...props} routes={route.routes} />
             )} />
         )
@@ -83,12 +84,12 @@ export default class Index extends Component {
                                     <Menu.Item ><Link to="/pages/dashboard">概览1</Link></Menu.Item>
                                 </SubMenu>
                                 <SubMenu title={<span><Icon type="appstore-o" />收藏夹</span>}>
-                                    <Menu.Item ><Link to="/pages/favorites">概览</Link></Menu.Item>
+                                    <Menu.Item ><Link to="/pages/favorites">我的收藏</Link></Menu.Item>
                                     <Menu.Item ><Link to="/pages/favorites/manager">管理</Link></Menu.Item>
                                 </SubMenu>
 
                                 <SubMenu title={<span><Icon type="book" />密码本</span>}>
-                                    <Menu.Item ><Link to="/pages/accounts">概览</Link></Menu.Item>                                    
+                                    <Menu.Item ><Link to="/pages/accounts">概览</Link></Menu.Item>
                                 </SubMenu>
 
                                 <SubMenu title={<span><Icon type="setting" />系统管理</span>}>
@@ -110,7 +111,7 @@ export default class Index extends Component {
                                 </ul>
                             </Header>
                             <Content style={{ margin: '24px 16px 0' }}>
-                                <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                                <div style={{ padding: 24, background: '#fff', minHeight: 360}}>
                                     {routes.map((route, i) => (
                                         <RouteWithSubRoutes key={i} {...route} />
                                     ))}
