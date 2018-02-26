@@ -35,7 +35,6 @@ class Index extends React.Component {
         if (data !== this.props.data) {
             if (nextProps.visible) {
                 delete data.key;
-                console.log(data);
                 this.props.form.setFieldsValue(data);
             }
         }
@@ -55,10 +54,8 @@ class Index extends React.Component {
                 return;
             }
             let cryp = new crypto();
-            let key = cryp.genKey(values.key);
-            let encode = cryp.aesEncrypt(values.password, key);
-            let desCode = cryp.aesDecrypt(encode, key)
-
+            let encode = cryp.encrypt(values.password, values.key);
+            
             delete values.key;
             delete values.password;
 
@@ -93,8 +90,7 @@ class Index extends React.Component {
             alert('请输入key');
         }
         let cryp = new crypto();
-        let decodeKey = cryp.genKey(key);
-        let password = cryp.aesDecrypt(secretText, decodeKey)
+        let password = cryp.decrypt(secretText, key)
 
         this.props.form.setFieldsValue({
             password
@@ -121,7 +117,7 @@ class Index extends React.Component {
                                     rules: [{ required: true, message: '账号名称' }],
                                 })(
                                     <Input placeholder="请输入账号名称" />
-                                    )}
+                                )}
                             </FormItem>
                             <FormItem {...this.formItemLayout} label="账号类型">
                                 {getFieldDecorator('type', {
@@ -132,7 +128,7 @@ class Index extends React.Component {
                                             this.typeList.map(v => <Option key={v.id} value={v.id}>{v.text}</Option>)
                                         }
                                     </Select>
-                                    )}
+                                )}
                             </FormItem>
 
                             <FormItem {...this.formItemLayout} label="网址">
@@ -146,7 +142,7 @@ class Index extends React.Component {
                                     rules: [{ required: true, message: '请输入用户名' }],
                                 })(
                                     <Input placeholder="用户名" />
-                                    )}
+                                )}
                             </FormItem>
 
                             <FormItem {...this.formItemLayout} label="标签">
@@ -169,7 +165,7 @@ class Index extends React.Component {
                                     rules: [{ required: true, message: '请输入秘钥' }],
                                 })(
                                     <Input type="password" placeholder="秘钥请牢记，若遗忘则无法找回" />
-                                    )}
+                                )}
                             </FormItem>
 
                             <FormItem {...this.formItemLayout} label="密码" className="mb-5">
@@ -177,7 +173,7 @@ class Index extends React.Component {
                                     rules: [{ required: true, message: '请输入密码' }],
                                 })(
                                     <Input type={this.state.showPassword ? 'text' : 'password'} onChange={this.onPasswordChange} placeholder="密码，仅用于加密而不保存在后端" />
-                                    )}
+                                )}
                             </FormItem>
 
                             <Row className="mb-10" key="view">

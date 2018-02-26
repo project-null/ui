@@ -20,6 +20,18 @@ class Index extends React.Component {
                 visible: false,
             }
         }
+        this.genPassword();
+    }
+
+    genPassword() {
+        let ranStr = Math.random().toString(36).substr(7);
+        let time = new Date().getTime() % 100;
+        let symbols = ['_', '-', '@', '#', '!']
+
+        let symbolsIndex = Math.floor(Math.random() * symbols.length)
+        let symbol = symbols[symbolsIndex];
+        
+        console.log(`${ranStr}${symbol}${time}`);
     }
 
     componentDidMount() {
@@ -138,6 +150,9 @@ class Index extends React.Component {
         return (
             <div className="account-password">
                 <div className="text-right mb-10">
+                    <Button type="primary" onClick={() => this.genPassword()}>
+gen password
+                    </Button>
                     <Button type="primary" onClick={() => this.setState({ accountDetail: { visible: true, mode: 'add' } })}>
                         <Icon type="user-add" />
                     </Button>
