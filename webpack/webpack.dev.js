@@ -29,9 +29,18 @@ module.exports = webpackMerge(commonConfig, {
     devServer: {
         hot: true,
         proxy: [{
-            context: ['/v1/**'],
-            target: 'http://localhost:19931',
+            context: ['/graphql'],
+            target: 'http://192.168.6.10:19931',
             secure: false
+        },{
+            context: ['/v1/**'],
+            target: 'http://192.168.6.10:19931',
+            secure: false
+        },{
+          context:['/channel/**'],
+          target:'http://image.baidu.com',
+          secure: false,
+          changeOrigin:true
         }]
     },
 });
