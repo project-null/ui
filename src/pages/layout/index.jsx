@@ -19,6 +19,8 @@ import FavoritesManager from '../favorites/manager';
 import Users from '../users';
 import accounts from '../accounts';
 
+import userModels from  '../../models/users';
+
 import P1 from '../p1';
 import P2 from '../p2';
 import P3 from '../p3';
@@ -29,12 +31,19 @@ export default class Index extends Component {
         this.state = {
             collapsed: false
         };
+        let userInfoStr = sessionStorage.getItem('userInfo');
+        if (!!userInfoStr) {
+            this.userInfo = JSON.parse(userInfoStr);
+        }
     };
 
     toggle() {
         this.setState({
             collapsed: !this.state.collapsed,
         });
+    }
+    onLoginOut(){
+        userModels.logout(sessionStorage.getItem('token'));
     }
 
     render() {
@@ -66,13 +75,13 @@ export default class Index extends Component {
                 <Menu.Item>
                     <a>个人设置</a>
                 </Menu.Item>
-                <Menu.Item>                    
-                    <Link to="/">登出</Link>
+                <Menu.Item>
+                    <Link to="/" onClick={this.onLoginOut.bind(this)}>登出</Link>
                 </Menu.Item>
             </Menu>
         );
 
-
+        let userName = this.userInfo.loginName || '';
         return (
             <Router history={history}>
                 <div>
@@ -104,14 +113,14 @@ export default class Index extends Component {
                                     <li>
                                         <Dropdown overlay={menu}>
                                             <a className="ant-dropdown-link" href="#">
-                                                <Icon type="user" />张三<Icon type="down" />
+                                                <Icon type="user" />{userName}<Icon type="down" />
                                             </a>
                                         </Dropdown>
                                     </li>
                                 </ul>
                             </Header>
                             <Content style={{ margin: '24px 16px 0' }}>
-                                <div style={{ padding: 24, background: '#fff', minHeight: 360}}>
+                                <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                                     {routes.map((route, i) => (
                                         <RouteWithSubRoutes key={i} {...route} />
                                     ))}

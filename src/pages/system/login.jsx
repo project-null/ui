@@ -13,8 +13,7 @@ class NormalLoginForm extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 UsersModel.login(values).then(xhr => {
-                    let token = xhr.data;                    
-                    UsersModel.setToken(token);
+                    UsersModel.setToken(xhr.data);
                     this.props.history.push('/pages');
                 });
             }
@@ -32,14 +31,14 @@ class NormalLoginForm extends React.Component {
                                     rules: [{ required: true, message: 'Please input your username!' }],
                                 })(
                                     <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-                                    )}
+                                )}
                             </FormItem>
                             <FormItem hasFeedback>
                                 {getFieldDecorator('password', {
                                     rules: [{ required: true, message: 'Please input your Password!' }],
                                 })(
                                     <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-                                    )}
+                                )}
                             </FormItem>
                             <FormItem>
                                 <Button type="primary" htmlType="submit">login in </Button>
