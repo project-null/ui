@@ -26,14 +26,16 @@
     "webpack-dev-server": "^2.10.0",
     "webpack-merge": "^4.1.1"
   },
-  "scripts": {    
+  "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.js --hotOnly --colors --inline --history-api-fallback --progress --host 0.0.0.0",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod.js --progress --profile --bail"
   },
   "dependencies": {
     "antd": "^3.1.1",
     "crypto-js": "^3.1.9-1",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "react-lazyload": "^2.3.0",
+    "react-roll-container": "^1.0.1"
   },
   "name": "ui",
   "version": "1.0.0",
