@@ -66,8 +66,8 @@ export default class Index extends Component {
                 <Menu.Item>
                     <a>个人设置</a>
                 </Menu.Item>
-                <Menu.Item>
-                    <a>登出</a>
+                <Menu.Item>                    
+                    <Link to="/">登出</Link>
                 </Menu.Item>
             </Menu>
         );

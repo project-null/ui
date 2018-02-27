@@ -149,10 +149,7 @@ class Index extends React.Component {
     render() {
         return (
             <div className="account-password">
-                <div className="text-right mb-10">
-                    <Button type="primary" onClick={() => this.genPassword()}>
-gen password
-                    </Button>
+                <div className="text-right mb-10">                    
                     <Button type="primary" onClick={() => this.setState({ accountDetail: { visible: true, mode: 'add' } })}>
                         <Icon type="user-add" />
                     </Button>
