@@ -2,6 +2,7 @@
   column-count: 1;
   width:100%;
   margin: 0 auto;
+  position: relative;
   .folder-ul{
     -moz-column-count:10; /* Firefox */
     -webkit-column-count:10; /* Safari 和 Chrome */
@@ -10,7 +11,6 @@
     -webkit-column-gap: 0;
     column-gap: 0;
     .folder-li{
-      height: 120px;
       cursor: pointer;
       box-sizing: border-box;
       padding: 10px;
@@ -18,7 +18,7 @@
       -moz-page-break-inside: avoid;
       -webkit-column-break-inside: avoid;
       break-inside: avoid;
-      border: 1px solid #000;
+
       .folder-img{
         width: 100%;
         margin-bottom:10px;
@@ -32,13 +32,40 @@
         text-align: center;
       }
       &:hover{
-        .website-img{
+        .folder-img{
           -webkit-mask:-webkit-linear-gradient(rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0.1));
         }
-        border: 1px solid #6f72bd;
         box-shadow: 0 0 5px rgba(0,0,0,.15);
         transition: all .25s ease;
+        box-sizing: border-box;
       }
+    }
+    .folder-li-puls{
+      font-size: 80px;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+  .context-menu{
+    width: 100px;
+    position: absolute;
+    z-index: 9999;
+    background: #fff;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    .context-menu--option{
+      cursor: pointer;
+      height: 30px;
+      line-height: 30px;
+      padding: 0 5px;
+      border-top: 1px solid #000;
+      box-sizing: border-box;
+      &:hover{
+        background: rgba(0,0,0,.1)
+      }
+    }
+    .context-menu--option:last-child{
+      border-bottom: 1px solid #000;
     }
   }
 }

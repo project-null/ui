@@ -1,18 +1,15 @@
 import ajax from './ajax';
 
 const Index = {
-    getImg:()=>{ return ajax.get('/channel/listjson?pn=0&rn=159&tag1=宠物&tag2=全部&ftags=气质&ie=utf8')},
+    getImg:(params)=>{ return ajax.get(`/channel/listjson?pn=0&rn=${params.rn}&tag1=${params.tag1}&tag2=${params.tag2}&ftags=${params.ftags}&ie=utf8`)},
 
-    getAllFolder: () => { return ajax.get('/v1/favorites/folder') },
-
-    save: (body) => { return ajax.post('/v1/accounts', body) },
-    update: (body) => { return ajax.put('/v1/accounts', body) },
-    delete: (uuid) => { return ajax.delete(`/v1/accounts/${uuid}`) },
-
-    getAllWebsite: () => { return ajax.get('/v1/favorites/website') },
-    test: () => { return ajax.post('/graphql',{
-      query:`query{favorites {_id, name,desc,iconURL,url,folderID }}`
-    }) },
+    createFolder: (body) => { return ajax.post('/v1/favorites/folder', body) },
+    deleteFolder: (id) => { return ajax.delete(`/v1/favorites/folder/${id}`) },
+    editFolder: (id,body) => { return ajax.put(`/v1/favorites/folder/${id}`, body) },
+    importWebsite:(body) => { return ajax.post('/v1/favorites/website/import', body) },
+    createWebsite:(body) => { return ajax.post('/v1/favorites/website', body) },
+  
+    getFavorites : (query) => { return ajax.post('/graphql',query) },
 
 }
 
