@@ -24,7 +24,7 @@ export default class Index extends React.Component {
   }
 
   componentDidMount(){
-      this.getFavorites();
+      this.getFolder();
       // this.getImg();
       document.addEventListener('click', this._handleClick.bind(this));
       document.addEventListener('scroll', this._handleScroll.bind(this));
@@ -34,12 +34,19 @@ export default class Index extends React.Component {
     document.removeEventListener('click', this._handleClick.bind(this));
     document.removeEventListener('scroll', this._handleScroll.bind(this));
   }
-  getFavorites(){
-    const query = {
-      query:`query{favoritesFolder {_id, name,desc,order,parentID }}`
-    };
-    FavoritesModel.getFavorites(query).then(response=>{
-      this.setState({folder:response.data.data.favoritesFolder});
+  // getFavorites(){
+  //   const query = {
+  //     query:`query{favoritesFolder {_id, name,desc,order,parentID }}`
+  //   };
+  //   FavoritesModel.getFavorites(query).then(response=>{
+  //     this.setState({folder:response.data.data.favoritesFolder});
+  //   })
+  // }
+
+  getFolder(){
+    FavoritesModel.getFolder().then(response=>{
+      const data = response.data;
+      this.setState({folder:data});
     })
   }
 
@@ -71,7 +78,7 @@ export default class Index extends React.Component {
               this.setState({
                 visible: false
               });
-              this.getFavorites();
+              this.getFolder();
             }, 500);
           }).catch(e=>{
             notification.error({
@@ -86,7 +93,7 @@ export default class Index extends React.Component {
               this.setState({
                 visible: false
               });
-              this.getFavorites();
+              this.getFolder();
             }, 500);
           }).catch(e=>{
             notification.error({
@@ -139,7 +146,7 @@ export default class Index extends React.Component {
      FavoritesModel.deleteFolder(folderInfo._id).then(response=>{
       setTimeout(() => {
        this.setState({ is_menu_show: false })
-        this.getFavorites();
+        this.getFolder();
       }, 500);
      }).catch(e=>{
        notification.error({
@@ -176,7 +183,7 @@ export default class Index extends React.Component {
        FavoritesModel.importWebsite(body).then(response=>{
          setTimeout(() => {
            this.setState({ is_import_show: false })
-           this.getFavorites();
+           this.getFolder();
          }, 500);
        }).catch(e=>{
          notification.error({
@@ -208,7 +215,7 @@ export default class Index extends React.Component {
             FavoritesModel.createWebsite(body).then(response=>{
               setTimeout(() => {
                 this.setState({ is_create_show: false });
-                this.getFavorites();
+                this.getFolder();
               }, 500);
             }).catch(e=>{
               notification.error({
@@ -226,7 +233,7 @@ export default class Index extends React.Component {
 
   render() {
     const {folder,visible,is_menu_show,style,folderInfo,flag,is_import_show,is_create_show} = this.state;
-    if(!!folder.length){
+    if(folder && folder.length){
       return (
         <div className="folder-wrap">
           <ul className="folder-ul">

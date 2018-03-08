@@ -16,9 +16,7 @@ export default class index extends React.Component {
   }
 
   componentDidMount(){
-      // this.getAllWebsite();
-      this.getFavorites().then(response=>{
-        // console.log(response,'resss');
+      this.getWebsite().then(response=>{
         if(response.length){
           this.setState({website:response});
           const params = {
@@ -27,24 +25,29 @@ export default class index extends React.Component {
             tag2:'全部',
             ftags:'气质'
           };
-          // this.getImg(params);
+          this.getImg(params);
         }
       })
-  }
+  }  
 
+  // getFavorites(){
+  //   const query = {
+  //     query:`query{favorites {_id, name,desc,iconURL,url,folderID }}`
+  //   };
+  //   return FavoritesModel.getFavorites(query).then(response=>{
+  //       return response.data.data.favorites;
+  //   })
+  // }
 
-
-  getFavorites(){
-    const query = {
-      query:`query{favorites {_id, name,desc,iconURL,url,folderID }}`
-    };
-    return FavoritesModel.getFavorites(query).then(response=>{
-        return response.data.data.favorites;
+  getWebsite(){
+    return FavoritesModel.getWebsite().then(response=>{
+      return response.data;
     })
   }
 
   getImg(params){
     FavoritesModel.getImg(params).then(response=>{
+      console.log(response)
       const data = response.data.data;
       let img = [];
       data.map(ele=>{
@@ -66,8 +69,7 @@ export default class index extends React.Component {
 
   render() {
     const {website,img,height} = this.state;
-    console.log(img.length)
-    if(!!website.length){
+    if(website && website.length){
       return (
         <MyJRoll height={height + 'px'} bgColor={'#fff'}>
           <div className="website-wrap">

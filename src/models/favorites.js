@@ -5,11 +5,15 @@ const Index = {
 
     createFolder: (body) => { return ajax.post('/v1/favorites/folder', body) },
     deleteFolder: (id) => { return ajax.delete(`/v1/favorites/folder/${id}`) },
+
     editFolder: (id,body) => { return ajax.put(`/v1/favorites/folder/${id}`, body) },
     importWebsite:(body) => { return ajax.post('/v1/favorites/website/import', body) },
     createWebsite:(body) => { return ajax.post('/v1/favorites/website', body) },
   
-    getFavorites : (query) => { return ajax.post('/graphql',query) },
+
+    getWebsite:() => { return ajax.get('/v1/favorites/website') },
+    getFolder:() => { return ajax.get('/v1/favorites/folder') },
+    // getFavorites : (query) => { return ajax.post('/graphql',query) },
 
 }
 

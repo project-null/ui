@@ -30,11 +30,12 @@ class Index extends React.Component {
   render() {
     const { title, visible, onOk, onCancel} = this.props;
     const { filename } = this.state;
+    const token = sessionStorage.getItem('token');
     const props = {
       name: 'file',
       action: '/v1/common/upload',
       headers: {
-        //
+        token
       },
       onChange:(info)=> this.onChange(info)
     };

@@ -11,7 +11,7 @@ function resolve(dir) {
 module.exports = webpackMerge(commonConfig, {
     entry: {
         main: './src/index.jsx', // 程序入口
-        vendor: ['react', 'react-dom', 'react-router', 'prop-types'], // 常用组件分拆        
+        vendor: ['react', 'react-dom', 'react-router', 'prop-types'], // 常用组件分拆
         antd: ['antd'],
     },
     output: {
@@ -24,9 +24,9 @@ module.exports = webpackMerge(commonConfig, {
     plugins: [
         new webpack.NamedModulesPlugin(),
         new CleanWebpackPlugin([resolve('dist')]),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true,
-        }),
+         new webpack.LoaderOptionsPlugin({
+             minimize: true,
+         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,
