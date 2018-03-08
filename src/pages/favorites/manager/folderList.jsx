@@ -4,7 +4,7 @@ const Index = (props) => {
     const { title, img, desc, handleClick,onContextMenu } = props;
     return (
         <li className="folder-li" onClick={handleClick} onContextMenu={onContextMenu}>
-            <img src="/src/static/images/timg.jpeg" className="folder-img" />
+            <img src="/static/images/timg.jpeg" className="folder-img" />
             <span className="folder-span">{title}</span>
         </li>
     )

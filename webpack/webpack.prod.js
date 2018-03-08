@@ -24,6 +24,7 @@ module.exports = webpackMerge(commonConfig, {
     plugins: [
         new webpack.NamedModulesPlugin(),
         new CleanWebpackPlugin([resolve('dist')]),
+<<<<<<< HEAD
          new webpack.LoaderOptionsPlugin({
              minimize: true,
          }),
@@ -35,5 +36,18 @@ module.exports = webpackMerge(commonConfig, {
             sourceMap: true,
             mangle: true
         })
+=======
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+        }),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false,
+        //         drop_console: true
+        //     },
+        //     sourceMap: true,
+        //     mangle: true
+        // })
+>>>>>>> 147aba1f866d83f9a62ed6c4f15d899f3c4bfee4
     ]
 });
