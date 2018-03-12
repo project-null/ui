@@ -27,13 +27,13 @@ module.exports = webpackMerge(commonConfig, {
         new webpack.LoaderOptionsPlugin({
             minimize: true,
         }),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false,
-        //         drop_console: true
-        //     },
-        //     sourceMap: true,
-        //     mangle: true
-        // })
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                drop_console: true
+            },
+            sourceMap: true,
+            mangle: true
+        })
     ]
 });
